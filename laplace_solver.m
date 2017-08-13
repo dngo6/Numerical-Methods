@@ -6,6 +6,8 @@ del_x = 1;
 
 n_nodes = 3;
 
+x_nodes = n_nodes^2;
+y_nodes = n_nodes^2;
 
 diagonal = zeros(n_nodes,n_nodes);
 
@@ -57,10 +59,24 @@ for i=1:n_nodes
     temp = blkdiag(temp, diagonal);
 end
 
-% for i=1:n_nodes
-%     for j = :n_nodes
-%         temp(i,j) = (temp(i-1,j)/del_x^2 + temp(i+1,j)/del_x^2 + temp(i,j-1)/del_y^2 + temp(i,j+2)/del_y^2)/(2/del_x^2 + 2/del_y^2);
-%     end
-% end
+for i=0:n_nodes-1
+    for j=0:n_nodes-1
+        offset_i = 1+i*n_nodes;
+        offset_j = 1+j*n_nodes;
+        if i == j+1
+           temp(offset_i:offset_i+n_nodes-1,offset_j:offset_j+n_nodes-1)=sub; 
+        end
+        
+        if i == j-1
+            temp(offset_i:offset_i+n_nodes-1,offset_j:offset_j+n_nodes-1)=sup;
+        end
+    end
+end
+
+% for i=1:y_nodes
+%      for j=1:x_nodes
+%          temp(i,j) = (temp(i-1,j)/del_x^2 + temp(i+1,j)/del_x^2 + temp(i,j-1)/del_y^2 + temp(i,j+2)/del_y^2)/(2/del_x^2 + 2/del_y^2);
+%      end
+%  end
 
 Laplace_plot_2017;
