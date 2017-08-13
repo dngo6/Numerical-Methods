@@ -6,6 +6,8 @@ del_x = 1;
 
 n_nodes = 3;
 
+x_nodes = 10;
+y_nodes = 10;
 
 diagonal = zeros(n_nodes,n_nodes);
 
@@ -50,12 +52,28 @@ for i=1:n_nodes
     end
 end
 
-temp = [];
+temp = zeros(n_nodes^2, n_nodes^2);
 
 %Time to put it all together!
 for i=1:n_nodes
-    temp = blkdiag(temp, diagonal);
+    temp = blkdiag(
 end
+
+% for i=1:n_nodes
+%     for j=1:n_nodes
+%         for k=i*n_nodes:i*n_nodes+n_nodes
+%             for m=j*n_nodes:j*n_nodes+n_nodes
+%                 %Three different scenarios...Perfectly diagonal, super, sub
+%                 %Diagonal
+%                 if i == j
+%                     %start populating this chunk
+%                     temp(k,m) = diagonal(mod(k,n_nodes)+1, mod(m,n_nodes)+1);
+%                 end
+%             
+%             end
+%         end
+%     end
+% end
 
 % for i=1:n_nodes
 %     for j = :n_nodes
@@ -63,4 +81,4 @@ end
 %     end
 % end
 
-Laplace_plot_2017;
+%Laplace_plot_2017;
