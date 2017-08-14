@@ -26,19 +26,19 @@ NH3_int= 0.1 % mg/L
 NO2_int=1.8 % mg/L
 NO3_int= 2.8 % mg/L
 
-mu_a= .83;      %1/d  max AOB growth rate     0.20-0.90
-mu_n= .7;     %1/d max NOB growth rate
-k_da= 0.12;      %1/d    AOB death rate          0.05-0.15
-k_dn= 0.13;      %1/d   NOB death rate
+mu_a= .83      %1/d  max AOB growth rate     0.20-0.90
+mu_n= .7     %1/d max NOB growth rate
+k_da= 0.12      %1/d    AOB death rate          0.05-0.15
+k_dn= 0.13      %1/d   NOB death rate
 
 %   ********** LEAVE THESE VALUES FIXED *****************************
 Y_a=0.12;       %      yield of AOB cell/mg of NH3 0.1-0.15
 Y_n=0.12;       %  yield of NOB cell/mg of NO2
 K_a=0.5;         % half saturation const mg/L  0.5-1.0 
 K_n=0.5;         % mg/L
-theta_n=1.07       % 1.06-1.123  these theta values are for temp adjustment
-theta_K=1.053       %1.03-1.123
-theta_d=1.04        %1.03-1.08
+theta_n=1.07;       % 1.06-1.123  these theta values are for temp adjustment
+theta_K=1.053;       %1.03-1.123
+theta_d=1.04;        %1.03-1.08
 cpg_aob=5e9;            % AOB cells per gram (4x10^12 Grant, 1994)
 cpg_nob=5e9;            % NOB 
 % *** start the computation *****************************************
@@ -80,9 +80,30 @@ legend('NH_3','NO_2','NO_3','location','best')
 
 label0=sprintf('AOB = %g cells/L, NOB = %g cells/L', AOB_int*cpg_aob/1000,NOB_int*cpg_nob/1000)
 text(0.5,4.2,label0)  
-     
+
 hold off
-%figure(2)
+
+figure(2)
+%calculate relative error between the two data sets
+days = [0,3,7,11,18];
+y_interpolated = interp1(t,y,days);
+err_ammonia = [];
+err_nitrite = [];
+err_nitrate = [];
+%NH3 is ammonia
+%NO2 is nitrite
+%NO3 is nitrate
+for i=1:length(days)
+    err_ammonia(i) = 100*abs(data(i,2)-y_interpolated(i,3))/data(i,2);
+    err_nitrite(i) = 100*abs(data(i,3)-y_interpolated(i,4))/data(i,3);
+    err_nitrate(i) = 100*abs(data(i,4)-y_interpolated(i,5))/data(i,4);
+end
+
+plot(days, err_ammonia, days, err_nitrite, days, err_nitrate);
+title('Relative Error of calculated NH3, NO2, and NO3');
+legend('Ammonia (NH3)', 'Nitrite (NO2)', 'Nitrate (NO3)');
+xlabel('Day');
+ylabel('Percentage Error (%)');
 
 %  HOMEWORK INSTRUCTIONS:
 

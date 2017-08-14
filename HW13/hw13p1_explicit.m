@@ -1,7 +1,7 @@
 %Lec12_Explicit
 %lecture example backward difference in space, forward in time.
 clear
-clf
+clc
 
 U= 100;
 E= 2000;
@@ -12,13 +12,10 @@ L = 100;
 num_cells = 5;
 del_t = 0.05;
 num_time_steps = 30;
-%c_in = 1;
-%c_0 = 0;
-%c_out = 0;
 
-implicit = 0;
+implicit = 0; %1 is switch for implicit; 0 is explicit
 
-del_x = L/num_cells;
+del_x = L/num_cells; 
 
 if implicit == 1
     sub = (-b/del_x + 1/del_x^2) *del_t;
@@ -29,7 +26,6 @@ else
     dia = 1 - 2/del_x^2 - b/del_x * del_t;
     sup = 1/del_x^2 + b/del_x * del_t;
 end
-
 
 col_data = [sub dia sup];
 
@@ -43,10 +39,6 @@ A(1,1:2) = [dia sup];
 A(num_cells, num_cells-1:num_cells) = [sub dia];
 
 W = zeros(num_cells,1);
-
-
-%W(1) = -sub*c_in;
-%W(num_cells) = -sup*c_out;
 
 c = ones(num_cells,1);
 
