@@ -16,7 +16,7 @@ c_in = 1;
 c_0 = 0;
 c_out = 0;
 
-implicit = 1;
+implicit = 0;
 
 del_x = 0.02;
 
