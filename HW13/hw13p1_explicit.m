@@ -47,9 +47,9 @@ x_plot = [del_x/2:del_x:L-del_x/2];
 for i=1:num_time_steps
     
     if implicit == 1
-        c_new =(c+W)\A;
-    else
         c_new =A\(c+W);
+    else
+        c_new =A\c+W;
     end
     
     plot(x_plot, c_new);

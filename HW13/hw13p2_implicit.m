@@ -13,7 +13,11 @@ c_in = 1;
 c_0 = 0;
 c_out = 0;
 
+<<<<<<< HEAD:HW13/hw13p2_implicit.m
 implicit = 0; %1 is switch for implicit; 0 is explicit
+=======
+implicit = 0;
+>>>>>>> origin/master:HW13/hw13p2.m
 
 del_x = 0.02;
 
