@@ -1,7 +1,7 @@
 %Lec12_Explicit
 %lecture example backward difference in space, forward in time.
 clear
-clf
+clc
 
 U= 100;
 E= 2000;
@@ -16,7 +16,7 @@ c_in = 1;
 c_0 = 0;
 c_out = 0;
 
-implicit = 0;
+implicit = 1;
 
 del_x = 0.02;
 

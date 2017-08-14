@@ -1,7 +1,7 @@
 %Lec12_Explicit
 %lecture example backward difference in space, forward in time.
 clear
-clf
+clc
 
 U= 100;
 E= 2000;
@@ -17,9 +17,9 @@ T_0 = 20;
 
 del_x = L/num_cells;
 
-sub = del_t/del_x^2;
-dia = (1-k*del_t - (2/del_x^2)*del_t);
-sup = del_t/del_x^2;
+sub = 1/del_x^2;
+dia = (1-k - (2/del_x^2));
+sup = 1/del_x^2;
 
 col_data = [sub dia sup];
 
@@ -33,11 +33,12 @@ B(1,1:2) = [dia sup];
 B(num_cells, num_cells-1:num_cells) = [sub dia];
 B(num_cells, num_cells-1) = sup+sub;
 
-frc = k*del_t*T_0;
+frc = k*T_in;
 
 W(1:num_cells,1) = frc;
-W(1) = sub*T_in+frc;
+W(1,1) = sub*T_in+frc;
 W(num_cells,1) = frc + (0);
+
 
 T = ones(num_cells,1)*T_0;
 
@@ -53,14 +54,12 @@ for i=1:num_time_steps
     
     k4 = B*(T+k3*del_t) + W;
     
-    T_new = T + ((k1+2*k2+2*k3+k4)*del_t)/6
+    T_new = T + (k1+2*k2+2*k3+k4)*del_t/6;
     
-    plot(x_plot, T_new, 'r--');
+    plot(x_plot, T_new);
     hold on
-    %pause
     T=T_new;
 end
 title(['Homework 12b: Transient Heat Transfer Problem at \Deltat =' num2str(del_t) ' and to t =' num2str(end_time)]);
-figure(1)
 hold off
 

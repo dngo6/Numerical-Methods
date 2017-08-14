@@ -43,15 +43,13 @@ W(num_cells,1) = frc + (0);
 T = ones(num_cells,1)*T_0;
 
 x_plot = [del_x:del_x:L];
-
+figure(1)
 for i=1:num_time_steps
     
     T_new = A*T+W;
     
     plot(x_plot, T_new);
-    figure (1)
     hold on
-    %pause
     T=T_new;
 end
 hold off

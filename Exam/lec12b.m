@@ -9,7 +9,7 @@ A_c = 10;
 k = 2;
 L = 100;
 num_cells = 100;
-del_t = 0.0005;
+del_t = 0.000005;
 end_time = 0.05;
 num_time_steps = end_time/del_t;
 c_in = 1;
@@ -57,7 +57,6 @@ for i=1:num_time_steps
     plot(x_plot, c_new, 'r--');
     figure (1)
     hold on
-    pause
     c=c_new;
 end
 hold off

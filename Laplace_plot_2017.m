@@ -27,8 +27,6 @@ side_nodes=n_nodes^0.5;
         Lx=(side_nodes+1)*del_x
         Ly=(side_nodes+1)*del_y
         [x,y] = meshgrid(0:del_x:Lx,0:del_y:Ly);
-%write the for loops for this hw as specified.
-
 % and now:  Voila!  (that's French)
 figure(1)
     [c, h] = contourf(x,y,z_p_bc); clabel(c, h); colorbar;  
