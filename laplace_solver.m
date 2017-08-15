@@ -4,10 +4,10 @@ clear
 del_y = 1;
 del_x = 1;
 
-n_nodes = 3;
+n_nodes = 9;
 
-x_nodes = n_nodes^2;
-y_nodes = n_nodes^2;
+x_nodes = n_nodes*0.5;
+y_nodes = n_nodes*0.5;
 
 diagonal = zeros(n_nodes,n_nodes);
 
@@ -73,16 +73,6 @@ for i=0:n_nodes-1
     end
 end
 
-% for i=2:y_nodes-1
-%      for j=2:x_nodes-2
-%          temp(i,j) = (temp(i-1,j)/del_x^2 + temp(i+1,j)/del_x^2 + temp(i,j-1)/del_y^2 + temp(i,j+2)/del_y^2)/(2/del_x^2 + 2/del_y^2);
-%      end
-%  end
-
-for i=1:y_nodes
-     for j=1:x_nodes
-         temp=A\RHS;
-     end
- end
+temp=A\RHS;
 
 Laplace_plot_2017;

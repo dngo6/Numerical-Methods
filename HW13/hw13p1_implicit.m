@@ -22,7 +22,6 @@ for i=2:num_cells-1
     for j = 1: 3
         A(i,i-2+j) = col_data(j);
     end
-    del_t = del_t+del_t*0.1; %Increase delta t by 10%
 end
 
 A(1,1:2) = [dia sup];
@@ -30,20 +29,19 @@ A(num_cells, num_cells-1:num_cells) = [sub dia];
 
 %*************** Set Boundary Conditions *************%
 W = zeros(num_cells,1);
-u = ones(num_cells,1);
+u = zeros(num_cells,1);
 
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 
+figure (1)
 for i=1:num_time_steps
    
     u_new =A\(u+W);
-    
-    plot(x_plot, u_new);
-    figure (1)
-    hold on
+   
     u=u_new;
 end
+plot(x_plot, u_new);
 hold off
 
 
