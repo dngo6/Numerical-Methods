@@ -1,5 +1,4 @@
-%Lec12_Explicit
-%lecture example backward difference in space, forward in time.
+%Homework 13 Part 1 (Implicit)
 clear
 clc
 
@@ -30,7 +29,7 @@ A(num_cells, num_cells-1:num_cells) = [sub dia];
 %*************** Set Boundary Conditions *************%
 W = zeros(num_cells,1);
 u = zeros(num_cells,1);
-
+u(1,1) = 1;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 

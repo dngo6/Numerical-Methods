@@ -30,14 +30,49 @@ c1(1) = C1_0;
 c2(1) = C2_0;
 c3(1) = C3_0;
 
+react2_hit = 0;
+react3_hit = 0;
+detected = 0;
+
 while t(i) < end_time %c1(i) > 1 || c2(i) > 1 || c2(i) > 1 %while the concentration of each pond is not 1
     t(i+1) = t(i) + del_t;
     
     [c1(i+1), c2(i+1), c3(i+1)] = rk4_step(t(i), c1(i), c2(i), c3(i), del_t);
     
-    if c1(i) == 1 || c2(i) == 1 || c3(i) == 1
-        disp(t(i));
+   if (detected == 0)
+        if c2(i) > 1
+            react2_hit = 1;
+        end
+
+        if c3(i) > 1
+            react3_hit = 1;
+        end
+
+        if (react2_hit == 1 && react3_hit == 1)
+            if c1(i) < 1
+                disp('System 1');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
+            if c2(i) < 1
+                disp('System 2');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
+            if c3(i) < 1
+                disp('System 3');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
+        end
     end
+    
         
     i = i+1;
 end

@@ -32,7 +32,7 @@ c3(1) = C3_0;
 
 react2_hit = 0;
 react3_hit = 0;
-
+detected = 0;
 while t(i) < end_time %c1(i) > 1 || c2(i) > 1 || c2(i) > 1 %while the concentration of each pond is not 1
     t(i+1) = t(i) + del_t;
     
@@ -42,19 +42,37 @@ while t(i) < end_time %c1(i) > 1 || c2(i) > 1 || c2(i) > 1 %while the concentrat
     c2(i+1) = c2(i) + k2*del_t;
     c3(i+1) = c3(i) + k3*del_t;
     
-    if c2(i) > 1
-        react2_hit = 1;
-    end
-    
-    if c3(i) > 1
-        react3_hit = 1;
-    end
-    
-    if (react2_hit == 1 && react3_hit == 1)
-        if c1(i) < 1 || c2(i) < 1 || c3(i) < 1
-            disp(t(i));
-            react2_hit = 0;
-            react3_hit = 0;
+    if (detected == 0)
+        if c2(i) > 1
+            react2_hit = 1;
+        end
+
+        if c3(i) > 1
+            react3_hit = 1;
+        end
+
+        if (react2_hit == 1 && react3_hit == 1)
+            if c1(i) < 1
+                disp('System 1');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
+            if c2(i) < 1
+                disp('System 2');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
+            if c3(i) < 1
+                disp('System 3');
+                disp(t(i));
+                react2_hit = 0;
+                react3_hit = 0;
+                detected = 1;
+            end
         end
     end
     

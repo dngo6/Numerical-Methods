@@ -1,5 +1,4 @@
-%Lec12_Explicit
-%lecture example backward difference in space, forward in time.
+%Homework 13 Part 1 (Explicit)
 clear
 clc
 
@@ -13,19 +12,11 @@ num_cells = 5;
 del_t = 0.05;
 num_time_steps = 30;
 
-implicit = 0; %1 is switch for implicit; 0 is explicit
-
 del_x = L/num_cells; 
 
-if implicit == 1
-    sub = (-b/del_x + 1/del_x^2) *del_t;
-    dia = 1 + (b/del_x - 2/del_x^2)*del_t;
-    sup = -1/del_x^2 * del_t;
-else
-    sub = 1/del_x^2 * del_t;
-    dia = 1 - 2/del_x^2 - b/del_x * del_t;
-    sup = 1/del_x^2 + b/del_x * del_t;
-end
+sub = 1/del_x^2 * del_t;
+dia = 1 - 2/del_x^2 - b/del_x * del_t;
+sup = 1/del_x^2 + b/del_x * del_t;
 
 col_data = [sub dia sup];
 
@@ -39,23 +30,18 @@ A(1,1:2) = [dia sup];
 A(num_cells, num_cells-1:num_cells) = [sub dia];
 
 W = zeros(num_cells,1);
-
-c = ones(num_cells,1);
+u = ones(num_cells,1);
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 
 for i=1:num_time_steps
     
-    if implicit == 1
-        c_new =A\(c+W);
-    else
-        c_new =A\c+W;
-    end
+    u_new =A\u+W;
     
-    plot(x_plot, c_new);
+    plot(x_plot, u_new);
     figure (1)
     hold on
-    c=c_new;
+    u=u_new;
 end
 hold off
 
