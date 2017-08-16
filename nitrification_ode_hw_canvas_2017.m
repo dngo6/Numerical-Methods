@@ -26,10 +26,10 @@ NH3_int= 1.82 % mg/L
 NO2_int= 0.085 % mg/L
 NO3_int= 2.85 % mg/L
 
-mu_a= 0.45      %1/d  max AOB growth rate     0.20-0.90
+mu_a= 0.37      %1/d  max AOB growth rate     0.20-0.90
 mu_n= 1.2  %1/d max NOB growth rate
-k_da= 0.05     %1/d    AOB death rate          0.05-0.15
-k_dn= 0.05     %1/d   NOB death rate
+k_da= 0.07     %1/d    AOB death rate          0.05-0.15
+k_dn= 0.09     %1/d   NOB death rate
 
 %   ********** LEAVE THESE VALUES FIXED *****************************
 Y_a=1;       %      yield of AOB cell/mg of NH3 0.1-0.15
