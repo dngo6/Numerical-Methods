@@ -4,7 +4,7 @@ clear
 del_y = 1;
 del_x = 1;
 
-n = 3;
+n = 19;
 n_nodes = n^2;
 
 x_nodes = n;
@@ -91,7 +91,7 @@ rhs(n,n) = T_north+T_east;
 rhs(n,1) = T_west+T_north;
 rhs(1,n) = T_east+T_south;
 
-rhs = reshape(rhs',n_nodes,1);
+rhs = reshape(rhs,n_nodes,1);
 
 temp=A\rhs;
 

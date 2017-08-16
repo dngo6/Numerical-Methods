@@ -1,5 +1,5 @@
 function [ T, x_plot ] = hw12_func( num_cells, del_t, end_time )
-k = 2;
+k = .01;
 L = 10;
 num_time_steps = end_time/del_t;
 T_in = 200;

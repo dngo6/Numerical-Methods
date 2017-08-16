@@ -26,14 +26,14 @@ NH3_int= 1.82 % mg/L
 NO2_int= 0.085 % mg/L
 NO3_int= 2.85 % mg/L
 
-mu_a= 0.09      %1/d  max AOB growth rate     0.20-0.90
-mu_n= 1.2   %1/d max NOB growth rate
-k_da= 0.5     %1/d    AOB death rate          0.05-0.15
-k_dn= 0.5     %1/d   NOB death rate
+mu_a= 0.45      %1/d  max AOB growth rate     0.20-0.90
+mu_n= 1.2  %1/d max NOB growth rate
+k_da= 0.05     %1/d    AOB death rate          0.05-0.15
+k_dn= 0.05     %1/d   NOB death rate
 
 %   ********** LEAVE THESE VALUES FIXED *****************************
-Y_a=0.12;       %      yield of AOB cell/mg of NH3 0.1-0.15
-Y_n=0.12;       %  yield of NOB cell/mg of NO2
+Y_a=1;       %      yield of AOB cell/mg of NH3 0.1-0.15
+Y_n=1;       %  yield of NOB cell/mg of NO2
 K_a=0.5;         % half saturation const mg/L  0.5-1.0 
 K_n=0.5;         % mg/L
 theta_n=1.07;       % 1.06-1.123  these theta values are for temp adjustment

@@ -1,17 +1,10 @@
+function [ u ] = hw13p2_explicit( del_t, num_time_steps )
+global x_plot
 %Homework 13 Part 2
 %Problem 30.13
-clear
-clc
-
-k = 2;
 L = 1;
-num_cells = 5;
-del_t = 0.000038;
+num_cells = 50;
 end_time = 0.0038;
-num_time_steps = 100;
-c_in = 1;
-c_0 = 0;
-c_out = 0;
 
 del_x = 0.02;
 
@@ -31,30 +24,17 @@ A(1,1:2) = [dia sup];
 A(num_cells, num_cells-1:num_cells) = [sub dia];
 
 W = zeros(num_cells,1);
-W(1) = -sub*c_in;
-W(num_cells) = -sup*c_out;
-
-c = ones(num_cells,1)*c_0;
+u = zeros(num_cells,1);
+W(1,1) = 0;
+W(num_cells,1) = 1;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 
-for i=1:num_time_steps
+for i=1:num_time_steps   
+    u_new =A\(u+W);
     
-    c_new =A\(c+W);
-    
-    plot(x_plot, c_new);
-    figure (1)
-    hold on
-    c=c_new;
+    u=u_new;
 end
 
-hold off
-
-
-
-
-
-
-
-
+end
 

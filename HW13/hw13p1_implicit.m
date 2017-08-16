@@ -1,9 +1,7 @@
-%Homework 13 Part 1 (Implicit)
-clear
-clc
+function [ u ] = hw13p1_implicit( b )
+global x_plot
 
 k = 2;
-b = 4;
 L = 100;
 num_cells = 5;
 del_t = 0.05;
@@ -11,9 +9,9 @@ num_time_steps = 30;
 
 del_x = L/num_cells; 
 
-sub = (-b/del_x + 1/del_x^2)*del_t;
-dia = 1 + (b/del_x - 2/del_x^2)*del_t;
-sup = -1/del_x^2 * del_t;
+sub = 1/del_x^2 * del_t;
+dia = 1 - 2/del_x^2 - b/del_x * del_t;
+sup = 1/del_x^2 + b/del_x * del_t;
 
 col_data = [sub dia sup];
 
@@ -29,25 +27,17 @@ A(num_cells, num_cells-1:num_cells) = [sub dia];
 %*************** Set Boundary Conditions *************%
 W = zeros(num_cells,1);
 u = zeros(num_cells,1);
-u(1,1) = 1;
+
+W(1) = 1;
+W(num_cells) = 0;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 
-figure (1)
 for i=1:num_time_steps
-   
     u_new =A\(u+W);
    
     u=u_new;
 end
-plot(x_plot, u_new);
-hold off
 
-
-
-
-
-
-
-
+end
 

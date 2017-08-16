@@ -2,19 +2,20 @@
 clear
 clc
 
-k = 2;
+k = .01;
 L = 10;
-num_cells = 100;
-del_t = 0.00005;
+num_cells = 5;
+del_t = 0.05;
 end_time = 0.05;
 num_time_steps = end_time/del_t;
 T_in = 200;
 T_0 = 20;
+T_a = 20;
 
 del_x = L/num_cells;
 
 sub = del_t/del_x^2;
-dia = (1-k*del_t - (2/del_x^2)*del_t);
+dia = (1 - (2/del_x^2+k)*del_t);
 sup = del_t/del_x^2;
 
 col_data = [sub dia sup];
@@ -29,7 +30,7 @@ A(1,1:2) = [dia sup];
 A(num_cells, num_cells-1:num_cells) = [sub dia];
 A(num_cells, num_cells-1) = sup+sub;
 
-frc = k*del_t*T_in;
+frc = k*del_t*T_a;
 
 W(1:num_cells,1) = frc;
 W(1,1) = sub*T_in+frc;
