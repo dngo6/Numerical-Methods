@@ -28,13 +28,13 @@ W = zeros(num_cells,1);
 u = zeros(num_cells,1);
 
 W(num_cells,1) = 0;
-W(1,1) = 0.45;
+W(1,1) = .45;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 
 for i=1:num_time_steps
    
-    u_new =A\(u+W);
+    u_new =A*u+W;
    
     u=u_new;
 end

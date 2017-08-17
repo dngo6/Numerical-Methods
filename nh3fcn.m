@@ -16,4 +16,3 @@ function [ vector ] = nh3fcn( t,y )
     vector = [dx_aob; dx_nob; dc_nh3; dc_no2; dc_no3];
     
 end
-

@@ -4,7 +4,7 @@ clear
 del_y = 1;
 del_x = 1;
 
-n = 19;
+n = 7;
 n_nodes = n^2;
 
 x_nodes = n;

@@ -26,10 +26,10 @@ NH3_int= 1.82 % mg/L
 NO2_int= 0.085 % mg/L
 NO3_int= 2.85 % mg/L
 
-mu_a= 0.37      %1/d  max AOB growth rate     0.20-0.90
-mu_n= 1.2  %1/d max NOB growth rate
-k_da= 0.07     %1/d    AOB death rate          0.05-0.15
-k_dn= 0.09     %1/d   NOB death rate
+mu_a= 0.45     %1/d  max AOB growth rate     0.20-0.90
+mu_n= 1.674  %1/d max NOB growth rate
+k_da= 0.053     %1/d    AOB death rate          0.05-0.15
+k_dn= 0.118     %1/d   NOB death rate
 
 %   ********** LEAVE THESE VALUES FIXED *****************************
 Y_a=1;       %      yield of AOB cell/mg of NH3 0.1-0.15
@@ -94,9 +94,9 @@ err_nitrate = [];
 %NO2 is nitrite
 %NO3 is nitrate
 for i=1:length(days)
-    err_ammonia(i) = 100*abs(data(i,2)-y_interpolated(i,3))/data(i,2);
-    err_nitrite(i) = 100*abs(data(i,3)-y_interpolated(i,4))/data(i,3);
-    err_nitrate(i) = 100*abs(data(i,4)-y_interpolated(i,5))/data(i,4);
+    err_ammonia(i) = 100*(abs(data(i,2)-y_interpolated(i,3))/data(i,2));
+    err_nitrite(i) = 100*(abs(data(i,3)-y_interpolated(i,4))/data(i,3));
+    err_nitrate(i) = 100*(abs(data(i,4)-y_interpolated(i,5))/data(i,4));
 end
 
 plot(days, err_ammonia, days, err_nitrite, days, err_nitrate);
@@ -104,27 +104,5 @@ title('Relative Error of calculated NH3, NO2, and NO3');
 legend('Ammonia (NH3)', 'Nitrite (NO2)', 'Nitrate (NO3)');
 xlabel('Day');
 ylabel('Percentage Error (%)');
-
-%  HOMEWORK INSTRUCTIONS:
-
-% Develop a function file to simulate the observed measurements, you'll
-% need 5 equations.  Run the file get my plot first.  If you can't get my
-% plot, don't move on to the coefficient fitting, fix your code first
-% before changing coefficients.
-
-% *** save the AOB, NOB, ammonia, nitrite, and nitrate concentrations at times that data were collected
-% That is at 0, 3, 7, 11, and 18 days.  Note that the MATLAB ODE45 won't have these values at the exact times so
-% we will use simple linear interpolation (good enough), 
-% Use MATLAB command:  interp1  (use >> help interp1)
-
-% ****  Add code to calculate the absolute relative error for the ammonia,
-% nitrite, and nitrate concentrations at each time  
-
-% Modify coefficients on lines 12-14 and 20-23 above to reduce your 
-% absolute error to 0.2 mg-N/L or lower. Spend no more than 1 hour trying
-% to do this. 
-
-% Produce a plot of your final output and report your final coefficients on
-% lines 12-14 and 20-23.  Report your maximum error for each concentration.
 
 

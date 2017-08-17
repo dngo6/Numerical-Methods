@@ -1,17 +1,15 @@
 function [ u ] = hw13p1_implicit( b )
 global x_plot
 
-k = 2;
-L = 100;
+L = 1;
 num_cells = 5;
-del_t = 0.05;
-num_time_steps = 30;
+del_t = 0.01;
+num_time_steps = 1;
 
 del_x = L/num_cells; 
-
-sub = 1/del_x^2 * del_t;
-dia = 1 - 2/del_x^2 - b/del_x * del_t;
-sup = 1/del_x^2 + b/del_x * del_t;
+sub = -del_t/del_x^2 + b*del_t/del_x;
+dia = 1 + (2*del_t)/del_x^2 - (b*del_t)/del_x;
+sup = del_t/del_x^2;
 
 col_data = [sub dia sup];
 
@@ -28,8 +26,8 @@ A(num_cells, num_cells-1:num_cells) = [sub dia];
 W = zeros(num_cells,1);
 u = zeros(num_cells,1);
 
-W(1) = 1;
-W(num_cells) = 0;
+W(1,1) = -sub+1;
+W(num_cells,1) = 0;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 

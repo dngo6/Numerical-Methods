@@ -8,9 +8,9 @@ end_time = 0.0038;
 
 del_x = 0.02;
 
-sub = -1+1/del_x^2*del_t;
-dia = 2/del_x^2*del_t;
-sup = -1/del_x^2*del_t;
+sub = -1/del_x^2*del_t;
+dia = 1+2/del_x^2*del_t;
+sup = -del_t/del_x^2;
 
 col_data = [sub dia sup];
 
@@ -27,7 +27,7 @@ W = zeros(num_cells,1);
 u = zeros(num_cells,1);
 
 W(1,1) = 0;
-W(num_cells,1) = 1;
+W(num_cells,1) = -sup;
 
 x_plot = [del_x/2:del_x:L-del_x/2];
 

@@ -5,8 +5,8 @@ clc
 k = .01;
 L = 10;
 num_cells = 5;
-del_t = 0.05;
-end_time = 0.05;
+del_t = 2;
+end_time = 2;
 num_time_steps = end_time/del_t;
 T_in = 200;
 T_0 = 20;
@@ -33,22 +33,23 @@ A(num_cells, num_cells-1) = sup+sub;
 frc = k*del_t*T_a;
 
 W(1:num_cells,1) = frc;
-W(1,1) = sub*T_in+frc;
-W(num_cells,1) = frc + (0);
+W(1,1) = frc+sub*T_in;
+W(num_cells,1) = frc;
 
 T = ones(num_cells,1)*T_0;
 
-x_plot = [del_x:del_x:L];
+x_plot = [0:del_x:L];
 figure(1)
 for i=1:num_time_steps
     
     T_new = A*T+W;
-    
-    plot(x_plot, T_new);
-    hold on
+   
     T=T_new;
 end
-hold off
+
+T_plot = [T_in; T];
+
+plot(x_plot, T_plot);
 
 title(['Homework 12: Transient Heat Transfer Problem at \Deltat =' num2str(del_t) ' and to t =' num2str(end_time)]);
 xlabel('x');

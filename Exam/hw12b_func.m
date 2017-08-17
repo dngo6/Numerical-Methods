@@ -1,15 +1,16 @@
 function [ T_B, x_plot ] = hw12b_func( num_cells, del_t, end_time )
 %HW12B Runge Kutta
-k = 2;
+k = .01;
 L = 10;
 num_time_steps = end_time/del_t;
 T_in = 200;
 T_0 = 20;
+T_a = 20;
 
 del_x = L/num_cells;
 
 sub = 1/del_x^2;
-dia = (1-k - (2/del_x^2));
+dia = (1 - (2/del_x^2+k));
 sup = 1/del_x^2;
 
 col_data = [sub dia sup];
@@ -24,15 +25,15 @@ B(1,1:2) = [dia sup];
 B(num_cells, num_cells-1:num_cells) = [sub dia];
 B(num_cells, num_cells-1) = sup+sub;
 
-frc = k*T_in;
+frc = k*T_a;
 
 W(1:num_cells,1) = frc;
-W(1,1) = sub*T_in+frc;
-W(num_cells,1) = frc + (0);
+W(1,1) = frc+sub*T_in;
+W(num_cells,1) = frc;
 
 T_B = ones(num_cells,1)*T_0;
 
-x_plot = [del_x:del_x:L];
+x_plot = [0:del_x:L];
 
 %RK4 Implementation
 for i=1:num_time_steps
@@ -48,6 +49,8 @@ for i=1:num_time_steps
 
         T_B=T_new;
 end
+
+T_B = [T_in; T_B];
 
 end
 
